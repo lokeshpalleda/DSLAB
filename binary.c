@@ -2,11 +2,7 @@
 int sort(int a[],int n)
 {
 	int temp=0,i,j;
-	printf("enter n:");
-	scanf("%d",&n);
-	printf("enter elements:");
-	for(i=0;i<n;i++)
-		scanf("%d",&a[i]);
+	
 
 	for(i=0;i<n;i++)
 		for(j=i+1;j<n;j++)
@@ -26,11 +22,16 @@ int sort(int a[],int n)
 }     
 int main()
 {
-   int a[100],n,mid,sta=0,end=n-1,pos=-1,key;;
+   int a[100],n,mid,pos=-1,key,i;
+   printf("enter n:");
+	scanf("%d",&n);
+	printf("enter elements:");
+	for(i=0;i<n;i++)
+		scanf("%d",&a[i]);
    sort(a,n);
+   int sta=0,end=n-1;
      printf("\nenter key:");
      scanf("%d",&key);
-     end=n-1;
      while(sta<=end)
      {
         mid=(sta+end)/2;
@@ -40,12 +41,22 @@ int main()
            break;
         }
      else if(key<a[mid])
+    {
      end=mid-1;
+     }
      else
+     {
+    
      sta=mid+1;
      }
+     }
      if(pos>=0)
-     printf("key found at %d",mid+1);
-     else 
+     {
+     printf("key found at %d",pos);
+     }
+     else
+     { 
      printf("key doesn't found");
+     }
 }
+
