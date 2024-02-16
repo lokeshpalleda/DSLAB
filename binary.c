@@ -41,22 +41,13 @@ int main()
            break;
         }
      else if(key<a[mid])
-    {
      end=mid-1;
-     }
      else
-     {
-    
      sta=mid+1;
      }
-     }
      if(pos>=0)
-     {
      printf("key found at %d",pos);
-     }
      else
-     { 
-     printf("key doesn't found");
-     }
+     printf("key doesn't found")
 }
 
