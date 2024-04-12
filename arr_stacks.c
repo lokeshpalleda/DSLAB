@@ -76,9 +76,7 @@ int main()
                push(d);
                print();
                break;
-        case 2:printf("enter the pop element:");
-               scanf("%d",&d);
-               pop();
+        case 2:pop();
                print();
                break;
         case 3:print();
