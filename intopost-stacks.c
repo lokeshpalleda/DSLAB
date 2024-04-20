@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
 # define MAX 100
 char stack[MAX];
 char infix[MAX];
@@ -31,13 +32,13 @@ int isempty()
 }
 char pop()
 {
-    int c;
+    char c;
     if(isempty())
     {
         printf("stack is underflowed");
         exit(1);
     }
-    stack[top]=c;
+    c=stack[top];
     top--;
     return c;
 }
@@ -65,7 +66,7 @@ void intopost()
 {
     int i,j=0;
     char c,next;
-    for(i=0; infix[i]!='\0'; i++)
+    for(i=0;i<strlen(infix); i++)
     {
         c=infix[i];
         switch(c)
@@ -76,6 +77,7 @@ void intopost()
         case ')':
             while((next=pop())!='(')
                 postfix[j++]=next;
+             break;   
         case '+':
         case '-':
         case '*':
@@ -85,6 +87,7 @@ void intopost()
                 postfix[j++]=pop();
             push(c);
             break;
+        default :postfix[j++]=c;
         }
     }
     while(!isempty())
