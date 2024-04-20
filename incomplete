@@ -5,77 +5,97 @@ char stack[MAX];
 char infix[MAX];
 char postfix[MAX];
 int top=-1;
-void isfull()
+int isfull()
 {
     if(top==MAX-1)
-    return 1;
-    else 
-    return 0;
+        return 1;
+    else
+        return 0;
 }
 void push(char c)
 {
     if(isfull())
     {
-    printf("stack is overflowed");
-    return;
+        printf("stack is overflowed");
+        return;
     }
     top++;
     stack[top]=c;
 }
-void isempty()
+int isempty()
 {
     if(top==-1)
-    return 1;
+        return 1;
     else
-    return 0;
+        return 0;
 }
 char pop()
 {
+    int c;
     if(isempty())
     {
-    printf("stack is underflowed");
-    return;
+        printf("stack is underflowed");
+        exit(1);
     }
     stack[top]=c;
     top--;
+    return c;
 }
 void print()
 {
-   for(i=0;stack[i]!=0;i++)
-   printf("%c",&stack[i]);
+    int i=0;
+    while(postfix[i])
+    {
+        printf("%c",postfix[i++]);
+    }
+    printf("\n");
 }
 int precedence( char c)
-{ 
+{
     if(c=='+'||c=='-')
-    return 1;
+        return 1;
     else if(c=='*'||c=='/')
-    return 2;
+        return 2;
     else if(c=='^')
-    return 3;
-    else 
-    return 0;
+        return 3;
+    else
+        return 0;
 }
-void infixtopostfix()
+void intopost()
 {
     int i,j=0;
-    char temp,c;
-    for(i=0;infix[i]!='\0';i++)
+    char c,next;
+    for(i=0; infix[i]!='\0'; i++)
     {
         c=infix[i];
-        if(c>='0'&&c<='9')
+        switch(c)
         {
-            postfix[j++]=c;
-            return;
+        case '(':
+            push(c);
+            break;
+        case ')':
+            while((next=pop())!='(')
+                postfix[j++]=next;
+        case '+':
+        case '-':
+        case '*':
+        case '/':
+        case '^':
+            while(!isempty()&&precedence(stack[top])>=precedence(c))
+                postfix[j++]=pop();
+            push(c);
+            break;
         }
-        while(!isempty()&&precedence(stack[top]>=precedence(c)))
-        {   
-              
-    
+    }
+    while(!isempty())
+        postfix[j++]=pop();
+    postfix[j]='\0';
+}
 int main()
 {
     printf("enter infix:");
-    gets(infix);
-    infixtopostfix();
+    scanf("%s",infix);
+    intopost();
     print();
 }
     
