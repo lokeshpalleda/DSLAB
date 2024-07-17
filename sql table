@@ -1,0 +1,10 @@
+CREATE TABLE student (rollno number(3) primary key,name varchar(20),age number(2),city varchar(20) unique);
+insert into student values(1,'ajay',19,'vizag');
+insert into student values(2,'pranav',18,'parvathipuram');
+insert into student values(3,'harsha',20,'vizinagram');
+insert into student values(4,'deepak',20,'salur');
+delete from student where rollno=4;
+update student set age=18 where rollno=3;
+alter table student add phone number(10) unique;
+update student set phone=9014796475 where rollno=1;
+select * from student;
